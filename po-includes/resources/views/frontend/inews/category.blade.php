@@ -45,7 +45,7 @@
                                                 <span class="berita-sub">
                                                     <ion-icon name="person" class="relative author-icon"></ion-icon> <span class="author">{{ $post->name }}</span>
                                                     <ion-icon name="calendar" class="relative date-post-icon"></ion-icon> <span class="date-posted">{{ date('d F Y', strtotime($post->created_at)) }}</span>
-                                                    <i class="fa fa-eye" aria-hidden="true"></i> <span class="date-posted">{{ $post->hits }}</span>
+                                                    <i class="fa fa-eye" aria-hidden="true"></i> <span class="date-posted">{{ $post->hits }} views</span>
                                                 </span>
                                                 <p class="berita-desc">
                                                     {{ \Str::limit(strip_tags($post->content), 150) }}
