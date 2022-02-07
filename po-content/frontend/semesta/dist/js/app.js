@@ -4,8 +4,6 @@ $(document).ready(function() {
 
 });
 
-    
-
     // Darkmode toggle event
     $('button.toggleTheme').on('click', function () {
       $('.toggleTheme').toggleClass('activated');
