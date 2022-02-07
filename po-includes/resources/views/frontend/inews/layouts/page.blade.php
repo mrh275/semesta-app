@@ -75,7 +75,14 @@
         <div class="menuList">
             <ul class="text-white menu-nav-lg">
                 @each(getTheme('partials.menu'), getMenus(), 'menu', getTheme('partials.menu'))
+                <li><a href="javascript:void(0)" class="nav-link search-button"><i class="fa fa-search"></i></a></li>
             </ul>
+            <div class="search-box absolute top-2/4 invisible opacity-0 right-40 bg-gray-300 dark:bg-gray-800 rounded-md transition duration-300">
+                <form action="{{ url('search') }}" method="get" class="flex items-center px-4">
+                    <input type="text" name="terms" class="input-form-search focus:ring-primary" placeholder="Cari apa...">
+                    <button type="submit" class="btn btn-primary ml-4"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
             <button class="toggleTheme ml-4">
                 <span class="toggle-indicator">
                     <i class="bi bi-moon-fill darkMode showDark"></i>
@@ -103,10 +110,10 @@
                 </span>
             </button>
         </div>
-        <div class="searchMobile flex justify-center">
-            <input type="text" placeholder="&nbsp; Ketik lalu tekan Enter&nbsp;&nbsp;" name="search" class="search-input w-0">
-            <button class="search-btn"><i class="bi bi-search search-icon"></i></button>
-        </div>
+        <form action="{{ url('search') }}" method="get" class="searchMobile flex justify-center">
+            <input type="text" placeholder="&nbsp; Ketik lalu tekan Enter&nbsp;&nbsp;" name="terms" class="search-input w-0">
+            <button class="search-btn" type="button"><i class="bi bi-search search-icon"></i></button>
+        </form>
         <div class="menuListMobile my-5">
             <ul class="text-white menu-nav">
                 @each(getTheme('partials.mobileMenu'), getMenus(), 'menu', getTheme('partials.menu'))
@@ -197,6 +204,13 @@
             autoplay: true,
             autoplaySpeed: 2500,
             infinite: true,
+        });
+
+        $('.search-button').on('click', function() {
+            $('.search-box').toggleClass('invisible');
+            $('.search-box').toggleClass('visible');
+            $('.search-box').toggleClass('opacity-0', 300);
+            $('.search-box').toggleClass('translate-y-8');
         });
 
         $(document).ready(function() {
