@@ -169,7 +169,7 @@
                     @endforeach
                 </div>
                 <div class="swiper-pagination"></div>
-
+                <a href="{{ url('album/all') }}" class="nav-link text-xl mt-4 font-bold" style="display: inline-block; text-align: center; color: #0099ff; " onmouseover="this.style.color='#0077ff'" onMouseOut="this.style.color='#0099ff'">Lihat lebih banyak...</a>
             </div>
         </div>
     </div>
