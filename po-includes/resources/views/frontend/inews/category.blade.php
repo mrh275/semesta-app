@@ -7,7 +7,7 @@
         <div class="page-hero flex justify-center items-center h-inherit absolute top-0 w-full">
             <div class="hero-section">
                 @if (isset($category))
-                    <h1 class="page-hero-title">{{ $category->title }} ({{ $posts->total() }})</h1>
+                    <h1 class="page-hero-title">Category : {{ $category->title }} ({{ $posts->total() }})</h1>
                 @else
                     <h1 class="page-hero-title">All Category</h1>
                 @endif
