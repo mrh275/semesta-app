@@ -13,12 +13,12 @@ Aplikasi ini memiliki banyak fitur dibawah ini :
    - Custom Pages
   
 2. Appearance
-   - Themes
+   - Themes (Not Active Yet)
    - Menu Manager
    - Settings
   
 3. Component
-   - Components Manager
+   - Components Manager (Not Active Yet)
    - Gallery
    - Contacts
   
