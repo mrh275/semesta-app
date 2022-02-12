@@ -151,25 +151,29 @@
                 <div class="partner">
                     <h2 class="partner-title">Link Terkait</h2>
                     <ul class="list-disc ml-5">
-                        <li class="partner-list"><a href="https://dapo.kemdikbud.go.id" class="backlink">Dapodik</a></li>
-                        <li class="partner-list"><a href="https://info.gtk.kemdikbud.go.id" class="backlink">Info GTK Dapodik</a></li>
-                        <li class="partner-list"><a href="https://ptk.datadik.kemdikbud.go.id" class="backlink">PTK Datadik</a></li>
+                        <li class="partner-list"><a href="https://vervalponsel.sman1rawamerta.sch.id" class="backlink">Verval Ponsel</a></li>
+                        <li class="partner-list"><a href="https://ujian.sman1rawamerta.sch.id" class="backlink">Ujian Online</a></li>
+                        <li class="partner-list"><a href="https://alumni.sman1rawamerta.sch.id" class="backlink">Jejak Lulusan</a></li>
+                        <li class="partner-list"><a href="https://ppdb.sman1rawamerta.sch.id" class="backlink">PPDB SMANESTA</a></li>
                         <li class="partner-list"><a href="https://ppdb.disdik.jabarprov.go.id" class="backlink">PPDB Jawa Barat</a></li>
-                        <li class="partner-list"><a href="https://gtk.belajar.kemdikbud.go.id" class="backlink">Portal GTK</a></li>
                     </ul>
                 </div>
             </div>
             <hr class="footer-separator">
             <div class="right-footer">
-                <h2 class="langganan">Berlangganan</h2>
+                <h2 class="langganan">Sosial Media</h2>
 
-                <!-- Langganan Form -->
-                <form action="" class="langganan-form">
-                    <input type="email" class="langganan-input" placeholder="namaanda@email.com">
-                    <div class="button-form-wrapper">
-                        <button class="btn btn-danger">Langganan</button>
-                    </div>
-                </form>
+                <!-- Sosial Media Sekolah -->
+                <ul>
+                    <li style="display: flex; align-items: center" class="address">
+                        <i class="fa fa-instagram" aria-hidden="true" style="font-size: 1.1rem"></i>
+                        <a href="https://instagram.com/sman1rawamerta" style="margin-left: 5px" target="_blank">@sman1rawamerta</a>
+                    </li>
+                    <li style="display: flex; align-items: center" class="address">
+                        <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                        <a href="https://www.youtube.com/channel/UCvTaB-4bPPasVnUf7QYI3tg" style="margin-left: 5px" target="_blank">SMAN 1 RAWAMERTA</a>
+                    </li>
+                </ul>
             </div>
         </div>
 
