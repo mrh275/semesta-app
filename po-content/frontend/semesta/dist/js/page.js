@@ -29,62 +29,8 @@ $('.user-comment').on('click', '.btn-reply-comment', function(ev) {
     replyWrapper.append(replyTag);
     replyCommentWrapper.appendTo(replyWrapper);
     $('.replying-comment').css('display', 'block');
+	$('#comment-form #parent').val(commentId);
+    $('html, body').animate({
+        scrollTop: $("#comment-form").offset().top
+    }, 1000);
 })
-
-// Insert comment on click
-$('.btn-comment').on('click', function(e) {
-    e.preventDefault();
-    let inputName = $('#input-comment-nama').val();
-    let inputEmail = $('#input-comment-email').val();
-    let inputComment = $('#input-comment-area').val();
-    // Add new comment
-    if(replyComment.getElementsByClassName('user-comment').length != 0) {
-        // Insert child comment
-        let insertComment = `<div class="${commentWrapper} ${commentReplyWrapper}" id="commentChild-${commentId}">
-        <div class="user-profile-comment w-max">
-            <img src="./img/no-profile-comment.png" alt="User" class="user-img-comment">
-        </div>
-        <div class="user-comment">
-            <h2 class="username-comment">${inputName}</h2>
-            <span class="comment-date">
-                <i class="bi bi-calendar-event-fill"></i> ${tglComment}
-            </span>
-            <p class="comment-desc">
-                ${inputComment}
-            </p>
-
-            <button class="btn-reply-comment">Reply <i class="bi bi-reply-fill"></i></button>
-        </div>
-    </div>`;
-
-    $('#comment-' + commentId).parent().append(insertComment);
-    $('.replying-comment').css('display', 'none');
-    } else {
-        // insert comment
-        let insertComment = `
-        <div class="${commentWrapper}">
-        <div class="user-profile-comment w-max">
-            <img src="./img/no-profile-comment.png" alt="User" class="user-img-comment">
-        </div>
-        <div class="user-comment">
-            <h2 class="username-comment">${inputName}</h2>
-            <span class="comment-date">
-                <i class="bi bi-calendar-event-fill"></i> ${tglComment}
-            </span>
-            <p class="comment-desc">
-                ${inputComment}
-            </p>
-
-            <button class="btn-reply-comment">Reply <i class="bi bi-reply-fill"></i></button>
-        </div>
-    </div>`;
-    
-    comments.append(insertComment);
-    }
-
-    // clear input value and hide selected reply comment
-    inputName = $('#input-comment-nama').val('');
-    inputEmail = $('#input-comment-email').val('');
-    inputComment = $('#input-comment-area').val('');
-    $('.replying-comment').empty();
-  })
