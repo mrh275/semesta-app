@@ -65,7 +65,7 @@
 <body class="bg-body" id="top">
     <nav class="navbar">
         <div class="branding lg:inline-flex hidden">
-            <a href="./" class="brand-link my-auto"><img src="{{ asset('po-content/uploads/' . getSetting('logo')) }}" alt="Logo SMA Negeri 1 Rawamerta" class="img-brand"></a>
+            <a href="{{ url('') }}" class="brand-link my-auto"><img src="{{ asset('po-content/uploads/' . getSetting('logo')) }}" alt="Logo SMA Negeri 1 Rawamerta" class="img-brand"></a>
             <h2 class="brand my-auto text-white font-medium">SMAN 1 Rawamerta</h2>
         </div>
 
