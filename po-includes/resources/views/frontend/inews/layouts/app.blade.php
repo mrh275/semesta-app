@@ -14,23 +14,24 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('po-content/uploads/' . getSetting('favicon')) }}" />
 
-    {{-- CSS --}}
+    <!-- CSS -->
     <link href="{{ asset('po-content/frontend/semesta/dist/css/main.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('po-content/frontend/semesta/dist/css/page.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('po-content/frontend/semesta/dist/css/vertical-slide.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('po-content/frontend/semesta/dist/css/calendar.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('po-content/frontend/semesta/dist/css/gallery.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('po-content/frontend/semesta/dist/css/simple-lightbox.min.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/css/splide.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-    {{-- JS --}}
+    <!-- JS -->
     <script src="{{ asset('po-content/frontend/semesta/dist/js/jquery.min.js') }}"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="{{ asset('po-content/frontend/semesta/dist/js/calendar.js') }}"></script>
     <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/js/splide.min.js"></script>
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     <script src="{{ asset('po-content/frontend/semesta/dist/js/simple-lightbox.min.js') }}"></script>
 
@@ -199,16 +200,45 @@
         })
 
         // Popular post vertical carousel
-        $("div.popular-post-wrapper").slick({
-            vertical: true,
-            accessibility: false,
+        let verticalSlider = new Splide('.splide', {
+            direction: 'ttb',
+            perMove: 1,
+            height: '520px',
+            fixedHeight: 'calc(27%)',
+            // autoplay: true,
+            interval: 2500,
+            type: 'loop',
             arrows: false,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2500,
-            infinite: true,
+            pagination: false,
+            breakpoints: {
+                1536: {
+                    fixedHeight: 'calc(24%)',
+                },
+                1366: {
+                    fixedHeight: 'calc(22%)',
+                },
+                1280: {
+                    fixedHeight: 'calc(22%)',
+                },
+                1023: {
+                    fixedHeight: 'calc(43%)',
+                },
+                768: {
+                    fixedHeight: 'calc(34%)',
+                },
+                640: {
+                    fixedHeight: 'calc(29%)',
+                },
+                568: {
+                    fixedHeight: 'calc(25%)',
+                },
+                434: {
+                    fixedHeight: 'calc(21%)',
+                },
+            }
         });
+        verticalSlider.mount();
+
 
         $('.search-button').on('click', function() {
             $('.search-box').toggleClass('invisible');
