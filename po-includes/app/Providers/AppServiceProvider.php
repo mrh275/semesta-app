@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Theme;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,7 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Paginator::defaultView('frontend.inews.partials.pagination');
-        Paginator::defaultSimpleView('frontend.inews.partials.pagination');
+        $themes = Theme::where('active', 'Y')->first();
+        Paginator::defaultView('frontend.' . $themes->folder . '.partials.pagination');
+        Paginator::defaultSimpleView('frontend.' . $themes->folder . '.partials.pagination');
     }
 }
