@@ -17,18 +17,13 @@
 
     <div class="content">
         <!-- Main -->
-        <div class="gallery-wrapper">
-            <div id="gallery" class="gallery-container gallery flex flex-wrap justify-center p-8">
+        <div class="gallery-wrapper py-4">
+            <div id="gallery" class="gallery-container gallery flex flex-wrap justify-center p-0">
                 @if (isset($album))
                     @foreach ($gallerys as $gallery)
-                        <div class="album-thumbnail" style="margin:10px">
-                            <a href="{{ getPicture($gallery->picture, 'original', $gallery->updated_by) }}">
-                                <img src="{{ getPicture($gallery->picture, 'medium', $gallery->updated_by) }}" alt="{{ $gallery->title }}" class="img-gallery">
-                            </a>
-                            <h5>
-                                <a href="{{ getPicture($gallery->picture, 'original', $gallery->updated_by) }}" class="album-title">{{ $gallery->title }}</a>
-                            </h5>
-                        </div>
+                        <a href="{{ getPicture($gallery->picture, 'original', $gallery->updated_by) }}">
+                            <img src="{{ getPicture($gallery->picture, 'medium', $gallery->updated_by) }}" alt="{{ $gallery->title }}" class="img-gallery">
+                        </a>
                     @endforeach
                 @else
                     @foreach ($gallerys as $gallery)
