@@ -1,164 +1,210 @@
-@extends(getTheme('layouts.page'))
+@extends(getTheme('layouts.app'))
 
 @section('content')
-    <!-- Page Image Hero -->
-    <div class="big-hero page-hero-section">
-        <img src="{{ getPicture($post->picture, null, $post->updated_by) }}" alt="{{ $post->title }}" class="page-img w-full h-inherit object-center object-cover">
-        <div class="page-hero flex justify-center items-center h-inherit absolute top-0 w-full">
-            <div class="hero-section">
-                <h1 class="page-hero-title">
-                    {{ $post->title }}
-                </h1>
-            </div>
-        </div>
-    </div>
-
-    <div class="content">
-        <div class="wrapper sejarah">
-            <div class="wrapper-content">
-                <!-- Detail Post Section -->
-                <div class="berita-container">
-                    <div class="berita-terbaru-container">
-                        <div class="berita-terbaru-content">
-                            <div class="berita-wrapper">
-                                <div class="berita-terbaru-1 berita-terbaru">
-                                    <div class="page-card">
-                                        <div class="page-card-title" style="display: flex; justify-content: center">
-                                            <img src="{{ getPicture($post->picture, null, $post->updated_by) }}" alt="{{ $post->title }}" class="page-img">
-                                        </div>
-                                        <div class="page-card-content">
-                                            <h1 class="page-title">
-                                                {{ $post->title }}
-                                            </h1>
-                                            <div class="page-sub">
-                                                <i class="bi bi-person-fill"></i> <span class="author">{{ $post->name }}</span>
-                                                <i class="bi bi-calendar-event-fill"></i> <span class="date-posted">{{ date('d F Y', strtotime($post->created_at)) }}</span>
-                                                <i class="fa fa-eye" aria-hidden="true"></i> <span class="date-posted">{{ $post->hits }} views</span>
-                                            </div>
-                                            <div class="page-desc">
-                                                {!! $content !!}
-                                            </div>
-                                        </div>
-                                        <div class="page-card-footer">
-                                            <div class="share-wrapper">
-                                                <h3 class="share-label">
-                                                    Share this post :
-                                                </h3>
-                                                <div class="share-button-wrapper">
-                                                    <a href="#" class="btn-share btn-share-fb">
-                                                        <i class="bi bi-facebook"></i>
-                                                    </a>
-                                                    <a href="#" class="btn-share btn-share-tw">
-                                                        <i class="bi bi-twitter"></i>
-                                                    </a>
-                                                    <a href="#" class="btn-share btn-share-ig">
-                                                        <i class="fa fa-instagram" id="insta" aria-hidden="true"></i>
-                                                    </a>
-                                                    <a href="whatsapp://send?text={{ prettyUrl($post) }}" data-action="share/whatsapp/share" class="btn-share btn-share-link">
-                                                        <i class="bi bi-share-fill"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="tag-wrapper">
-                                                <h3 class="tag-label">
-                                                    Tags :
-                                                </h3>
-                                                <div class="tag-btn-wrapper">
-                                                    <a href="#" class="tag-link">Tag</a>
-                                                    <a href="#" class="tag-link">Tag</a>
-                                                    <a href="#" class="tag-link">Tag</a>
-                                                    <a href="#" class="tag-link">Tag</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Comment Section -->
-                                    @if (getSetting('comment') == 'Y')
-                                        <div class="page-card comments">
-                                            <div class="page-card-title comment-title">
-                                                <h1 class="page-title">
-                                                    Komentar
-                                                </h1>
-                                                <span class="comment-count"><i class="bi bi-chat-dots-fill"></i> {{ $post->comments_count }}</span>
-                                            </div>
-                                            <div class="page-card-content">
-                                                @if ($post->comments_count > 0)
-                                                    @each(getTheme('partials.comment'), getComments($post->id, 5), 'comment', getTheme('partials.comment'))
-                                                    <div class="pagination-wrapper">
-                                                        {{ getComments($post->id, 5)->links() }}
-                                                    </div>
-                                                @else
-                                                    <p class="text-center">There are no comments yet</p>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    @endif
-
-                                    <!-- Comment Form Section -->
-                                    <div class="page-card comment-form" id="comment-form">
-                                        <div class="page-card-title comment-form-title">
-                                            <h1 class="page-title">
-                                                Tinggalkan Komentar
-                                            </h1>
-                                            <span class="form-comment-icon"> <i class="bi bi-pencil-square"></i></span>
-                                        </div>
-                                        <div class="page-card-content comment-form-wrapper">
-
-                                            <!-- Alert Danger -->
-                                            @if ($errors->any())
-                                                <div class="alert alert-danger">
-                                                    <ul>
-                                                        @foreach ($errors->all() as $error)
-                                                            <li>{{ $error }}</li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            @endif
-
-                                            <!-- Alert Success -->
-                                            @if (Session::has('flash_message'))
-                                                <div class="alert alert-success">
-                                                    {{ Session::get('flash_message') }}
-                                                </div>
-                                            @endif
-
-                                            <!-- Replying Comment -->
-                                            <div class="replying-comment" onchange="removeBtn()">
-
-                                            </div>
-                                            <form class="form-comment" method="post" action="{{ url('comment/send/' . $post->seotitle) }}">
-                                                {{ csrf_field() }}
-                                                <input type="hidden" name="parent" id="parent" value="{{ old('parent') == null ? 0 : old('parent') }}" />
-                                                <input type="hidden" name="post_id" id="post_id" value="{{ $post->id }}" />
-                                                <div class="comment-input">
-                                                    <label for="input-comment-nama" class="comment-label">Nama</label><br>
-                                                    <input type="text" name="name" id="input-comment-nama" class="input-form-comment" value="{{ old('name') }}">
-                                                </div>
-                                                <div class="comment-input">
-                                                    <label for="input-comment-email" class="comment-label">Email</label><br>
-                                                    <input type="text" name="email" class="input-form-comment" id="input-comment-email" value="{{ old('email') }}">
-                                                </div>
-                                                <div class="comment-input">
-                                                    <label for="input-comment-area" class="comment-label">Komentar anda</label><br>
-                                                    <textarea name="content" id="input-comment-area" class="comment-area">{{ old('content') }}</textarea>
-                                                </div>
-                                                <div class="comment-input">
-                                                    {!! NoCaptcha::display() !!}
-                                                </div>
-                                                <div class="form-comment-btn">
-                                                    <button class="btn btn-comment" type="submit">Submit</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @include(getTheme('partials.sidebar'))
-        </div>
-    </div>
+	<div class="page-title">&nbsp;</div>
+	
+	<div class="container">
+		<div class="row row-m">
+			<div class="col-sm-8 col-p main-content">
+				<div class="theiaStickySidebar">
+					<div class="post_details_inner">
+						<div class="post_details_block details_block2">
+							<div class="post-header">
+								<ul class="td-category">
+									<li><a class="post-category" href="{{ url('category/'.$post->cseotitle) }}">{{ $post->ctitle }}</a></li>
+								</ul>
+								<h2>{{ $post->title }}</h2>
+								<ul class="authar-info">
+									<li><a href="javascript:void(0);" class="link">{{ $post->name }}</a></li>
+									<li>{{ date('d F Y' , strtotime($post->created_at)) }}</li>
+									<li><a href="javascript:void(0);" class="link">{{ $post->hits }} Views</a></li>
+								</ul>
+							</div>
+							
+							<div class="adaptive">
+								@if($post->picture != '')
+									<img src="{{ getPicture($post->picture, null, $post->updated_by) }}" class="img-responsive" alt="{{ $post->title }}" />
+									<div class="caption-text">{{ $post->picture_description }}</div>
+								@endif
+							</div>
+							
+							{!! $content !!}
+						</div>
+						
+						@if($post->type == 'pagination')
+							<div class="post-footer"> 
+								<div class="row thm-margin">
+									<div class="col-xs-12 col-sm-12 col-md-12 thm-padding">
+										<ul class="pagination">
+											{!! postWithPagination($paginator, '<span class="ti-angle-left"></span>', '<span class="ti-angle-right"></span>') !!}
+										</ul>
+									</div>
+								</div>
+							</div>
+						@endif
+					</div>
+					
+					<div class="post-inner post-inner-2">
+						<div class="post-head">
+							<h2 class="title"><strong>Related </strong> Posts</h2>
+						</div>
+						
+						<div class="post-body">
+							<div id="post-slider-2" class="owl-carousel owl-theme">
+								<div class="item">
+									<div class="news-grid-2">
+										<div class="row row-margin">
+											@foreach(relatedPost($post->id, $post->tag, 3, 0) as $relatedPost)
+												<div class="col-xs-6 col-sm-4 col-md-4 col-padding">
+													<div class="grid-item">
+														<div class="grid-item-img">
+															<a href="{{ prettyUrl($relatedPost) }}">
+																<img src="{{ getPicture($relatedPost->picture, 'medium', $relatedPost->updated_by) }}" alt="" class="img-responsive">
+																@if($relatedPost->type == 'picture')
+																	<div class="link-icon">
+																		<i class="fa fa-image"></i>
+																	</div>
+																@elseif($relatedPost->type == 'video')
+																	<div class="link-icon">
+																		<i class="fa fa-camera"></i>
+																	</div>
+																@endif
+															</a>
+														</div>
+														<h5><a href="{{ prettyUrl($relatedPost) }}" class="title">{{ $relatedPost->title }}</a></h5>
+														<ul class="authar-info">
+															<li>{{ date('d F Y', strtotime($relatedPost->created_at)) }}</li>
+															<li class="hidden-sm"><a href="{{ prettyUrl($relatedPost) }}" class="link">{{ $relatedPost->hits }} Views</a></li>
+														</ul>
+													</div>
+												</div>
+											@endforeach
+										</div>
+									</div>
+								</div>
+								
+								<div class="item">
+									<div class="news-grid-2">
+										<div class="row row-margin">
+											@foreach(relatedPost($post->id, $post->tag, 3, 3) as $relatedPost2)
+												<div class="col-xs-6 col-sm-4 col-md-4 col-padding">
+													<div class="grid-item">
+														<div class="grid-item-img">
+															<a href="{{ prettyUrl($relatedPost2) }}">
+																<img src="{{ getPicture($relatedPost2->picture, 'medium', $relatedPost2->updated_by) }}" alt="" class="img-responsive">
+																@if($relatedPost2->type == 'picture')
+																	<div class="link-icon">
+																		<i class="fa fa-image"></i>
+																	</div>
+																@elseif($relatedPost2->type == 'video')
+																	<div class="link-icon">
+																		<i class="fa fa-camera"></i>
+																	</div>
+																@endif
+															</a>
+														</div>
+														<h5><a href="{{ prettyUrl($relatedPost2) }}" class="title">{{ $relatedPost2->title }}</a></h5>
+														<ul class="authar-info">
+															<li>{{ date('d F Y', strtotime($relatedPost2->created_at)) }}</li>
+															<li class="hidden-sm"><a href="{{ prettyUrl($relatedPost2) }}" class="link">{{ $relatedPost2->hits }} Views</a></li>
+														</ul>
+													</div>
+												</div>
+											@endforeach
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					@if(getSetting('comment') == 'Y')
+						<div class="comments-container">
+							<h3>Comments ({{ $post->comments_count }})</h3>
+							@if($post->comments_count > 0)
+								<ul class="comments-list">
+									@each(getTheme('partials.comment'), getComments($post->id, 5), 'comment', getTheme('partials.comment'))
+								</ul>
+								
+								<div class="post-footer"> 
+									<div class="row thm-margin">
+										<div class="col-xs-12 col-sm-12 col-md-12 thm-padding">
+											{{ getComments($post->id, 5)->links() }}
+										</div>
+									</div>
+								</div>
+							@else
+								<p class="text-center">There are no comments yet</p>
+							@endif
+						</div>
+					@endif
+					
+					<form class="comment-form" id="comment-form" action="{{ url('comment/send/'.$post->seotitle) }}" method="post">
+						{{ csrf_field() }}
+						<input type="hidden" name="parent" id="parent" value="{{ old('parent') == null ? 0 : old('parent') }}" />
+						<input type="hidden" name="post_id" id="post_id" value="{{ $post->id }}" />
+						<h3><strong>Leave</strong> a Comment</h3>
+						<div class="row">
+							<div class="col-sm-12">
+								@if (Session::has('flash_message'))
+									<div class="alert alert-success">{{ Session::get('flash_message') }}</div>
+								@endif
+								
+								@if ($errors->any())
+									<div class="alert alert-danger">
+										<ul>
+											@foreach ($errors->all() as $error)
+												<li>{{ $error }}</li>
+											@endforeach
+										</ul>
+									</div>
+								@endif
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label for="name">Name *</label>
+									<input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" placeholder="Your name *">
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<label for="email">Email *</label>
+								<div class="form-group">
+									<input type="text" class="form-control" id="email" name="email" value="{{ old('email') }}" placeholder="Your email address here">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="content">Comment *</label>
+							<textarea class="form-control" id="content" name="content" placeholder="Your Comment *" rows="5">{{ old('content') }}</textarea>
+						</div>
+						<div class="form-group">
+							{!! NoCaptcha::display() !!}
+						</div>
+						<button type="submit" class="btn btn-news">Submit</button>
+					</form>
+				</div>
+			</div>
+			
+			<div class="col-sm-4 col-p rightSidebar">
+				@include(getTheme('partials.sidebar'))
+			</div>
+		</div>
+	</div>
 @endsection
+
+@push('scripts')
+<script type="text/javascript">
+	$(function() {
+		$('.po-reply').on('click', function() {
+			var id = $(this).attr('id');
+			$('#comment-form #parent').val(id);
+			
+			$('html, body').animate({
+				scrollTop: $("#comment-form").offset().top
+			}, 1000);
+		});
+	});
+</script>
+@endpush

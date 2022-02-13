@@ -1,90 +1,87 @@
-@extends(getTheme('layouts.page'))
+@extends(getTheme('layouts.app'))
 
 @section('content')
-    <!-- Page Image Hero -->
-    <div class="big-hero page-hero-section">
-        <img src="{{ asset('po-content/uploads/bg-sekolah.jpg') }}" alt="Image-1" class="page-img w-full h-inherit object-center object-cover">
-        <div class="page-hero flex justify-center items-center h-inherit absolute top-0 w-full">
-            <div class="hero-section">
-                <h1 class="page-hero-title">
-                    Contact Us
-                </h1>
-            </div>
-        </div>
-    </div>
-
-    <div class="content">
-        <div class="wrapper sejarah">
-            <div class="wrapper-content">
-                <!-- Detail Post Section -->
-                <div class="berita-container">
-                    <div class="berita-terbaru-container">
-                        <div class="berita-terbaru-content">
-                            <div class="berita-wrapper">
-                                <div class="berita-terbaru-1 berita-terbaru">
-                                    <div class="page-card">
-                                        <div class="page-card-content" style="padding-top: 15px">
-                                            <h1 class="page-title">
-                                                Contact Us
-                                            </h1>
-                                            <div class="page-sub">
-                                                <span>Jika anda memiliki kritik dan saran. Silahkan tuliskan kritik dan saran anda pada form isian dibawah ini.</span>
-                                            </div>
-                                            <div class="page-desc">
-                                                @if (Session::has('flash_message'))
-                                                    <div class="alert alert-success">
-                                                        <span class="block sm:inline">{{ Session::get('flash_message') }}</span>
-                                                    </div>
-                                                @endif
-
-                                                @if ($errors->any())
-                                                    <div class="alert alert-danger">
-                                                        <ul>
-                                                            @foreach ($errors->all() as $error)
-                                                                <li>{{ $error }}</li>
-                                                            @endforeach
-                                                        </ul>
-                                                    </div>
-                                                @endif
-
-                                                <form action="{{ url('contact/send') }}" class="contact-wrapper" method="post">
-                                                    {{ csrf_field() }}
-                                                    <div class="contact-input">
-                                                        <label for="input-contact-nama" class="contact-label">Nama</label><br>
-                                                        <input type="text" name="nama" id="input-contact-nama" class="input-form-contact" value="{{ old('name') }}">
-                                                    </div>
-                                                    <div class="contact-input">
-                                                        <label for="input-contact-email" class="contact-label">Email</label><br>
-                                                        <input type="text" name="email" class="input-form-contact" id="input-contact-email" value="{{ old('email') }}">
-                                                    </div>
-                                                    <div class="contact-input">
-                                                        <label for="input-contact-email" class="contact-label">Subject</label><br>
-                                                        <input type="text" name="email" class="input-form-contact" id="input-contact-email" value="{{ old('subject') }}">
-                                                    </div>
-                                                    <div class="contact-input">
-                                                        <label for="input-contact-area" class="contact-label">Kritik dan Saran anda</label><br>
-                                                        <textarea name="contact-area" id="input-contact-area" class="contact-area">{{ old('message') }}</textarea>
-                                                    </div>
-                                                    <div class="contact-input">
-                                                        {!! NoCaptcha::display() !!}
-                                                    </div>
-                                                    <div class="form-contact-btn">
-                                                        <button class="btn btn-contact" type="submit">Submit</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sidebar -->
-            @include(getTheme('partials.sidebar'))
-        </div>
-    </div>
+	<div class="page-title">&nbsp;</div>
+	
+	<div class="container">
+		<div class="row row-m">
+			<div class="col-sm-8 main-content col-p">
+				<div class="theiaStickySidebar">
+					<div class="contact_form_inner">
+						<div class="panel_inner">
+							<div class="panel_header">
+								<h4><strong>We'd Love to Here</strong> Form you, Get in Touch With in Us?</h4>
+							</div>
+							<div class="panel_body">
+								@if (Session::has('flash_message'))
+									<div class="alert alert-success">{{ Session::get('flash_message') }}</div>
+								@endif
+								
+								@if ($errors->any())
+									<div class="alert alert-danger">
+										<ul>
+											@foreach ($errors->all() as $error)
+												<li>{{ $error }}</li>
+											@endforeach
+										</ul>
+									</div>
+								@endif
+								
+								<form class="comment-form" action="{{ url('contact/send') }}" method="post">
+									{{ csrf_field() }}
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label for="name">Full Name *</label>
+												<input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" placeholder="Your name *">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<label for="email">Email *</label>
+											<div class="form-group">
+												<input type="text" class="form-control" id="email" name="email" value="{{ old('email') }}" placeholder="Your email address here *">
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<label for="subject">Subject *</label>
+											<div class="form-group">
+												<input type="text" class="form-control" id="subject" name="subject" value="{{ old('subject') }}" placeholder="Write subject here *">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="message">Message *</label>
+										<textarea class="form-control" id="message" name="message" placeholder="Your Comment *" rows="5">{{ old('message') }}</textarea>
+									</div>
+									<div class="form-group">
+										{!! NoCaptcha::display() !!}
+									</div>
+									<button type="submit" class="btn btn-news">Submit</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4 rightSidebar col-p">
+				<div class="theiaStickySidebar">
+					<div class="panel_inner">
+						<div class="panel_header">
+							<h4><strong>Contact</strong> Info</h4>
+						</div>
+						<div class="panel_body">
+							<address>
+								<strong>{{ getSetting('web_name') }}</strong><br><br>
+								{{ getSetting('address') }}<br><br>
+								<abbr title="Email">Email:</abbr> {{ getSetting('email') }}<br>
+								<abbr title="Phone">Phone:</abbr> {{ getSetting('telephone') }}<br>
+								<abbr title="Fax">Fax:</abbr> {{ getSetting('fax') }}
+							</address>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
 @endsection

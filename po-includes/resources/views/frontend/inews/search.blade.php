@@ -1,78 +1,61 @@
-@extends(getTheme('layouts.page'))
+@extends(getTheme('layouts.app'))
 
 @section('content')
-    <!-- Page Image Hero -->
-    <div class="big-hero page-hero-section">
-        <img src="{{ asset('po-content/uploads/search-bg.jpg') }}" alt="Image-1" class="page-img w-full h-inherit object-center object-cover">
-        <div class="page-hero flex justify-center items-center h-inherit absolute top-0 w-full">
-            <div class="hero-section">
-                <h1 class="page-hero-title">
-                    Hasil Pencarian : @if ($posts->total() > 0) "{{ $terms }}" @else "{{ $terms }}" @endif
-                </h1><br>
-                <h1 class="page-hero-title">@if ($posts->total() > 0) {{ $posts->total() }} ditemukan @else Tidak ditemukan @endif</h1>
-            </div>
-        </div>
-    </div>
-
-    <div class="content">
-        <!-- Main -->
-        <div class="wrapper mt-7">
-            <div class="wrapper-content">
-                <!-- Post Category -->
-                <div class="berita-container">
-                    <div class="berita-terbaru-container">
-                        <div class="berita-terbaru-header lg:flex items-center justify-start">
-                            <h1 class="berita-terbaru-title whitespace-nowrap">
-                                Search Result :
-                            </h1>
-
-                            <form action="{{ url('search') }}" method="get" class="w-full pr-4 pl-4 lg:pl-0">
-                                <input type="text" class="input-form-search" name="terms" placeholder="Ketik lalu tekan Enter" value="@if ($posts->total() > 0) {{ $terms }} @else {{ $terms }} @endif">
-                            </form>
-                        </div>
-
-                        <div class="berita-terbaru-content">
-                            <div class="berita-wrapper">
-                                @if ($posts->total() > 0)
-                                    @foreach ($posts as $post)
-                                        <a href="{{ prettyUrl($post) }}" class="berita-terbaru-1 berita-terbaru">
-                                            <div class="card">
-                                                <div class="card-title">
-                                                    <img src="{{ getPicture($post->picture, 'medium', $post->updated_by) }}" alt="{{ $post->title }}" class="berita-img">
-                                                </div>
-                                                <div class="card-content">
-                                                    <h1 class="berita-title">
-                                                        {{ $post->title }}
-                                                    </h1>
-                                                    <span class="berita-sub">
-                                                        <ion-icon name="person" class="relative author-icon"></ion-icon> <span class="author">{{ $post->name }}</span>
-                                                        <ion-icon name="calendar" class="relative date-post-icon"></ion-icon> <span class="date-posted">{{ date('d F Y', strtotime($post->created_at)) }}</span>
-                                                        <i class="fa fa-eye" aria-hidden="true"></i> <span class="date-posted">{{ $post->hits }} views</span>
-                                                    </span>
-                                                    <p class="berita-desc">
-                                                        {{ \Str::limit(strip_tags($post->content), 150) }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    @endforeach
-                                @else
-                                    <div class="search-not-found">
-                                        <h3 class="text-7xl font-bold">404</h3>
-                                        <p class="text-xl">
-                                            Sorry, we can't find what you're looking for.
-                                        </p>
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="pagination-wrapper">
-                                {{ $posts->links() }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @include(getTheme('partials.sidebar'))
-        </div>
-    </div>
+	<div class="page-title">&nbsp;</div>
+	
+	<div class="container">
+		<div class="row row-m">
+			<div class="col-sm-8 col-p main-content">
+				<div class="theiaStickySidebar">
+					<div class="post-inner">
+						<div class="post-head">
+							@if($posts->total() > 0)
+								<h2 class="title">Search : {{ $terms }} ({{ $posts->total() }})</h2>
+							@else
+								<h2 class="title">Search : {{ $terms }}</h2>
+							@endif
+						</div>
+						
+						<div class="post-body">
+							@if($posts->total() > 0)
+								@foreach($posts as $post)
+									<div class="news-list-item articles-list">
+										<div class="img-wrapper">
+											<a href="{{ prettyUrl($post) }}" class="thumb"><img src="{{ getPicture($post->picture, 'medium', $post->updated_by) }}" alt="" class="img-responsive"></a>
+										</div>
+										<div class="post-info-2">
+											<h4><a href="{{ prettyUrl($post) }}" class="title">{{ $post->title }}</a></h4>
+											<ul class="authar-info">
+												<li><i class="ti-timer"></i> {{ date('d F Y' , strtotime($post->created_at)) }}</li>
+												<li><a href="{{ prettyUrl($post) }}" class="link"><i class="ti-eye"></i>{{ $post->hits }} Views</a></li>
+											</ul>
+											<p class="hidden-sm">{{ \Str::limit(strip_tags($post->content), 150) }}</p>
+										</div>
+									</div>
+								@endforeach
+							@else
+								<div class="typography-content text-center">
+									<h1>404</h1>
+									<h3>Search Data Not Found</h3>
+									<p style="margin:30px auto;">Unfortunately the content you’re looking for isn’t here. There may be a misspelling in your web address or you may have clicked a link for content that no longer exists. Perhaps you would be interested in our most recent articles.</p>
+								</div>
+							@endif
+						</div>
+						
+						<div class="post-footer"> 
+							<div class="row thm-margin">
+								<div class="col-xs-12 col-sm-12 col-md-12 thm-padding">
+									{{ $posts->links() }}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-4 col-p rightSidebar">
+				@include(getTheme('partials.sidebar'))
+			</div>
+		</div>
+	</div>
 @endsection

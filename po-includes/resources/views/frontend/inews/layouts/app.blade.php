@@ -1,264 +1,239 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ str_replace('_', '-', app()->getLocale()) }}" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="index, follow" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="robots" content="index, follow" />
     <meta name="generator" content="{{ config('app.version') }}" />
     <meta name="author" content="{{ getSetting('web_author') }}" />
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+	<meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    {!! SEO::generate() !!}
+	{!! SEO::generate() !!}
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('po-content/uploads/' . getSetting('favicon')) }}" />
+	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('po-content/uploads/'.getSetting('favicon')) }}" />
+	<link href="{{ asset('po-content/frontend/inews/css/jquery-ui.min.css') }}" rel="stylesheet" type="text/css"/>
+	<link href="{{ asset('po-content/frontend/inews/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
+	<link href="{{ asset('po-content/frontend/inews/css/animate.min.css') }}" rel="stylesheet" type="text/css"/>
+	<link href="{{ asset('po-content/frontend/inews/bootsnav/css/bootsnav.css') }}" rel="stylesheet" type="text/css"/>
+	<link href="{{ asset('po-content/frontend/inews/css/RYPP.css') }}" rel="stylesheet" type="text/css"/>
+	<link href="{{ asset('po-content/frontend/inews/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
+	<link href="{{ asset('po-content/frontend/inews/themify-icons/themify-icons.css') }}" rel="stylesheet" type="text/css"/>
+	<link href="{{ asset('po-content/frontend/inews/weather-icons/css/weather-icons.min.css') }}" rel="stylesheet" type="text/css"/>
+	<link href="{{ asset('po-content/frontend/inews/css/flaticon.css') }}" rel="stylesheet" type="text/css"/>
+	<link href="{{ asset('po-content/frontend/inews/owl-carousel/owl.carousel.css') }}" rel="stylesheet" type="text/css"/>
+	<link href="{{ asset('po-content/frontend/inews/owl-carousel/owl.theme.css') }}" rel="stylesheet" type="text/css"/>
+	<link href="{{ asset('po-content/frontend/inews/owl-carousel/owl.transitions.css') }}" rel="stylesheet" type="text/css"/>
+	<link href="{{ asset('po-content/frontend/inews/css/style.css') }}" rel="stylesheet" type="text/css"/>
 
-    <!-- CSS -->
-    <link href="{{ asset('po-content/frontend/semesta/dist/css/main.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('po-content/frontend/semesta/dist/css/page.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('po-content/frontend/semesta/dist/css/vertical-slide.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('po-content/frontend/semesta/dist/css/calendar.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('po-content/frontend/semesta/dist/css/gallery.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('po-content/frontend/semesta/dist/css/simple-lightbox.min.css') }}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/css/splide.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+	@stack('styles')
 
-    <!-- JS -->
-    <script src="{{ asset('po-content/frontend/semesta/dist/js/jquery.min.js') }}"></script>
-    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-    <script src="{{ asset('po-content/frontend/semesta/dist/js/calendar.js') }}"></script>
-    <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/js/splide.min.js"></script>
-    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-    <script src="{{ asset('po-content/frontend/semesta/dist/js/simple-lightbox.min.js') }}"></script>
+	<script>
+		window.Laravel = <?php echo json_encode([
+			'csrfToken' => csrf_token(),
+		]); ?>
+	</script>
 
+	{!! NoCaptcha::renderJs() !!}
 
-    @stack('styles')
-
-    <script>
-        window.Laravel = <?php echo json_encode([
-    'csrfToken' => csrf_token(),
-]); ?>
-    </script>
-
-    {!! NoCaptcha::renderJs() !!}
-
-    @if (getSetting('google_analytics_id') != '')
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', "{{ getSetting('google_analytics_id') }}"]);
-            _gaq.push(['_trackPageview']);
-            (function() {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
-    @endif
+	@if(getSetting('google_analytics_id') != '')
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', "{{ getSetting('google_analytics_id') }}"]);
+			_gaq.push(['_trackPageview']);
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		</script>
+	@endif
 </head>
+<body>
+	<header>
+		<div class="header-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-md-6 col-sm-6 col-lg-6">
+						<div class="header-social">
+							<ul>
+								<li><a href="{{ getSetting('facebook') }}"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="{{ getSetting('twitter') }}"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="{{ getSetting('youtube') }}"><i class="fa fa-youtube-play"></i></a></li>
+							</ul>
+						</div>
+						<div class="top-left-menu">
+							<ul>
+								<li><a href="{{ url('contact') }}">Contact</a></li>
+								<li><a href="{{ url('pages/about-us') }}">About Us</a></li>
+							</ul>
+						</div>
+					</div>
 
-<body class="bg-body" id="top">
-    <nav class="navbar">
-        <div class="branding lg:inline-flex hidden">
-            <a href="{{ url('') }}" class="brand-link my-auto"><img src="{{ asset('po-content/uploads/' . getSetting('logo')) }}" alt="Logo SMA Negeri 1 Rawamerta" class="img-brand"></a>
-            <h2 class="brand my-auto text-white font-medium">SMAN 1 Rawamerta</h2>
-        </div>
+					<div class="hidden-xs col-md-6 col-sm-6 col-lg-6">
+						<div class="header-right-menu">
+							<ul>
+								<li>
+                                    @if(getSetting('member_registration') == 'Y')
+                                    <a href="{{ url('register') }}"><i class="fa fa-lock"></i> Sign Up</a> or
+                                    @endif
+                                    <a href="{{ url('login') }}"> Login</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-        <img src="{{ asset('po-content/uploads/' . getSetting('logo')) }}" alt="Logo SMA Negeri 1 Rawamerta" class="w-8 my-auto lg:hidden">
-        <h2 class="brand my-auto text-white font-medium lg:hidden">SMAN 1 Rawamerta</h2>
+		<div class="header-mid hidden-xs">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo">
+							<a href="{{ url('/') }}"><img src="{{ asset('po-content/uploads/'.getSetting('logo')) }}" class="img-responsive" alt=""></a>
+						</div>
+					</div>
 
-        <div class="menuList">
-            <ul class="text-white menu-nav-lg">
-                @each(getTheme('partials.menu'), getMenus(), 'menu', getTheme('partials.menu'))
-                <li><a href="javascript:void(0)" class="nav-link search-button"><i class="fa fa-search"></i></a></li>
-            </ul>
-            <div class="search-box absolute top-2/4 invisible opacity-0 right-40 bg-gray-300 dark:bg-gray-800 rounded-md transition duration-300">
-                <form action="{{ url('search') }}" method="get" class="flex items-center px-4">
-                    <input type="text" name="terms" class="input-form-search focus:ring-primary" placeholder="Cari apa...">
-                    <button type="submit" class="btn btn-primary ml-4"><i class="fa fa-search"></i></button>
-                </form>
-            </div>
-            <button class="toggleTheme ml-4">
-                <span class="toggle-indicator">
-                    <i class="bi bi-moon-fill darkMode showDark"></i>
-                    <i class="bi bi-sun-fill lightMode"></i>
-                </span>
-            </button>
-        </div>
-        <button class="cursor-pointer hbButton" data-target="navMenuMobile">
-            <div class="hb-menu bg-gray-400"></div>
-            <div class="hb-menu bg-gray-400"></div>
-            <div class="hb-menu bg-gray-400"></div>
-        </button>
-    </nav>
+					<div class="col-sm-8">
+						<a href="{{ url('/') }}"><img src="{{ asset('po-content/frontend/inews/images/add728x90-1.jpg') }}" class="img-responsive" alt=""></a>
+					</div>
+				</div>
+			</div>
+		</div>
 
-    <div class="menuMobile navbarMenu h-full overflow-y-auto -left-full fixed" id="navMenuMobile">
-        <div class="w-full px-5 py-4">
-            <img src="{{ asset('po-content/uploads/' . getSetting('logo')) }}" alt="Logo SMAN 1 Rawamerta" class="w-12 mx-auto">
-            <h1 class="brand-mobile-title">SMAN 1 Rawamerta</h1>
-        </div>
-        <div class="mb-4">
-            <button class="toggleTheme mx-auto">
-                <span class="toggle-indicator">
-                    <i class="bi bi-moon-fill darkMode showDark"></i>
-                    <i class="bi bi-sun-fill lightMode"></i>
-                </span>
-            </button>
-        </div>
-        <form action="{{ url('search') }}" method="get" class="searchMobile flex justify-center">
-            <input type="text" placeholder="&nbsp; Ketik lalu tekan Enter&nbsp;&nbsp;" name="terms" class="search-input w-0">
-            <button class="search-btn" type="button"><i class="bi bi-search search-icon"></i></button>
-        </form>
-        <div class="menuListMobile my-5">
-            <ul class="text-white menu-nav">
-                @each(getTheme('partials.mobileMenu'), getMenus(), 'menu', getTheme('partials.menu'))
-            </ul>
-        </div>
-    </div>
+		<nav class="navbar navbar-default navbar-sticky navbar-mobile bootsnav">
+			<div class="top-search">
+				<div class="container">
+					<form method="get" action="{{ url('search') }}">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-search"></i></span>
+							<input name="terms" type="text" class="form-control" placeholder="Search">
+							<span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+						</div>
+					</form>
+				</div>
+			</div>
 
-    <main class="page_main_wrapper">
-        @yield('content')
-    </main>
+			<div class="container">
+				<div class="attr-nav">
+					<ul>
+						<li class="search"><a href="javascript:void(0);"><i class="fa fa-search"></i></a></li>
+					</ul>
+				</div>
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+						<i class="fa fa-bars"></i>
+					</button>
+					<a class="navbar-brand hidden-sm hidden-md hidden-lg" href="#brand"><img src="{{ asset('po-content/uploads/'.getSetting('logo')) }}" class="logo" alt=""></a>
+				</div>
+				<div class="collapse navbar-collapse" id="navbar-menu">
+					<ul class="nav navbar-nav navbar-left" data-in="" data-out="">
+						@each(getTheme('partials.menu'), getMenus(), 'menu', getTheme('partials.menu'))
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
 
-    <footer class="footer">
-        <div class="footer-wrapper">
-            <div class="left-footer">
-                <div class="footer-brand flex justify-start">
-                    <img src="{{ asset('po-content/uploads/' . getSetting('logo_footer')) }}" alt="Logo SMAN 1 Rawamerta" class="logo-footer">
-                    <h2 class="brand-footer">SMAN 1 Rawamerta</h2>
-                </div>
-                <div class="footer-address mt-4">
-                    <span class="font-semibold address-title">
-                        Alamat : <br>
-                    </span>
-                    <span class="address">
-                        <?= getSetting('address') ?>
-                    </span>
-                    <div class="contact-info block mt-3">
-                        <span class="address"><i class="bi bi-globe2"></i> <a href="https://sman1rawamerta.sch.id" class="backlink">https://sman1rawamerta.sch.id</a></span><br>
-                        <span class="address"><i class="bi bi-envelope"></i> {{ getSetting('email') }}</span><br>
-                        <span class="address"><i class="bi bi-telephone-fill"></i> {{ getSetting('telephone') }}</span>
-                    </div>
-                </div>
-            </div>
-            <hr class="footer-separator">
-            <div class="middle-footer">
-                <div class="partner">
-                    <h2 class="partner-title">Link Terkait</h2>
-                    <ul class="list-disc ml-5">
-                        <li class="partner-list"><a href="https://vervalponsel.sman1rawamerta.sch.id" class="backlink">Verval Ponsel</a></li>
-                        <li class="partner-list"><a href="https://ujian.sman1rawamerta.sch.id" class="backlink">Ujian Online</a></li>
-                        <li class="partner-list"><a href="https://alumni.sman1rawamerta.sch.id" class="backlink">Jejak Lulusan</a></li>
-                        <li class="partner-list"><a href="https://ppdb.sman1rawamerta.sch.id" class="backlink">PPDB SMANESTA</a></li>
-                        <li class="partner-list"><a href="https://ppdb.disdik.jabarprov.go.id" class="backlink">PPDB Jawa Barat</a></li>
-                    </ul>
-                </div>
-            </div>
-            <hr class="footer-separator">
-            <div class="right-footer">
-                <h2 class="langganan">Sosial Media</h2>
+	<main class="page_main_wrapper">
+		@yield('content')
+	</main>
 
-                <!-- Sosial Media Sekolah -->
-                <ul>
-                    <li style="display: flex; align-items: center" class="address">
-                        <i class="fa fa-instagram" aria-hidden="true" style="font-size: 1.1rem"></i>
-                        <a href="https://instagram.com/sman1rawamerta" style="margin-left: 5px" target="_blank">@sman1rawamerta</a>
-                    </li>
-                    <li style="display: flex; align-items: center" class="address">
-                        <i class="fa fa-youtube-play" aria-hidden="true"></i>
-                        <a href="https://www.youtube.com/channel/UCvTaB-4bPPasVnUf7QYI3tg" style="margin-left: 5px" target="_blank">SMAN 1 RAWAMERTA</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 footer-box">
+					<div class="about-inner">
+						<img src="{{ asset('po-content/uploads/'.getSetting('logo_footer')) }}" class="img-responsive" alt=""/>
+						<p>{{ \Str::limit(strip_tags(getPages(1)->content), 200) }}</p>
+						<ul>
+							<li><i class="ti-location-arrow"></i>{{ getSetting('address') }}</li>
+							<li><i class="ti-mobile"></i>{{ getSetting('telephone') }}</li>
+							<li><i class="ti-email"></i>{{ getSetting('email') }}</li>
+						</ul>
+					</div>
+				</div>
 
-        <div class="bottom-footer">
-            <div class="bottom-footer-content">
-                <span class="copyright">
-                    Copyright &copy; {{ date('Y') }} <a href="https://sman1rawamerta.sch.id" class="backlink">{{ getSetting('web_author') }}</a>. All Right Reserved.
-                </span>
-                <span class="copyright">
-                    Made with <i class="bi bi-suit-heart-fill text-red-500"></i> by Muhamad Ramdani Hidayatullah
-                </span>
-            </div>
-        </div>
-    </footer>
+				<div class="col-sm-2 footer-box">
+					<h3 class="wiget-title">Sitemap</h3>
+					<ul class="menu-services">
+						<li><a href="{{ url('/') }}">Home</a></li>
+						<li><a href="{{ url('pages/about-us') }}">About Us</a></li>
+						<li><a href="{{ url('pages/services') }}">Services</a></li>
+						<li><a href="{{ url('album/all') }}">Gallery</a></li>
+						<li><a href="{{ url('contact') }}">Contact</a></li>
+					</ul>
+				</div>
 
-    <button type="button" class="btn scrollTop"><i class="bi bi-arrow-up"></i></button>
+				<div class="col-sm-2 footer-box">
+					<h3 class="wiget-title">Category</h3>
+					<ul class="menu-services">
+						@foreach(getCategory(7) as $category)
+							<li><a href="{{ url('category/'.$category->seotitle) }}">{{ $category->title }} ({{ $category->posts_count }})</a></li>
+						@endforeach
+					</ul>
+				</div>
 
-    <script src="{{ asset('po-content/frontend/semesta/dist/js/app.js') }}"></script>
-    <script src="{{ asset('po-content/frontend/semesta/dist/js/page.js') }}"></script>
-    <script>
-        let lightbox = new SimpleLightbox(".gallery a", {
-            uniqueImages: false,
-        })
+				<div class="col-sm-4 footer-box">
+					<h3 class="wiget-title">Recent Post</h3>
+					<div class="footer-news-grid">
+						@foreach(latestPost(2) as $latestpost)
+							<div class="news-list-item">
+								<div class="img-wrapper">
+									<a href="{{ prettyUrl($latestpost) }}" class="thumb">
+										<img src="{{ getPicture($latestpost->picture, 'thumb', $latestpost->updated_by) }}" alt="" class="img-responsive">
+										@if($latestpost->type == 'picture')
+											<div class="link-icon">
+												<i class="fa fa-image"></i>
+											</div>
+										@elseif($latestpost->type == 'video')
+											<div class="link-icon">
+												<i class="fa fa-camera"></i>
+											</div>
+										@endif
+									</a>
+								</div>
+								<div class="post-info-2">
+									<h5><a href="{{ prettyUrl($latestpost) }}" class="title">{{ $latestpost->title }}</a></h5>
+									<ul class="authar-info">
+										<li><i class="ti-timer"></i> {{ date('d F Y', strtotime($latestpost->created_at)) }}</li>
+									</ul>
+								</div>
+							</div>
+						@endforeach
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
 
-        // Popular post vertical carousel
-        let verticalSlider = new Splide('.splide', {
-            direction: 'ttb',
-            perMove: 1,
-            height: '520px',
-            fixedHeight: 'calc(27%)',
-            // autoplay: true,
-            interval: 2500,
-            type: 'loop',
-            arrows: false,
-            pagination: false,
-            breakpoints: {
-                1536: {
-                    fixedHeight: 'calc(24%)',
-                },
-                1366: {
-                    fixedHeight: 'calc(22%)',
-                },
-                1280: {
-                    fixedHeight: 'calc(22%)',
-                },
-                1023: {
-                    fixedHeight: 'calc(43%)',
-                },
-                768: {
-                    fixedHeight: 'calc(34%)',
-                },
-                640: {
-                    fixedHeight: 'calc(29%)',
-                },
-                568: {
-                    fixedHeight: 'calc(25%)',
-                },
-                434: {
-                    fixedHeight: 'calc(21%)',
-                },
-            }
-        });
-        verticalSlider.mount();
+	<div class="sub-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-5 col-md-5">
+					<div class="copy">Copyright &copy; {{ date('Y') }} {{ getSetting('web_author') }}. All Rights Reserved.</div>
+				</div>
 
+				<div class="col-xs-12 col-sm-7 col-md-7">
+					<ul class="footer-nav">
+						<li><a href="{{ url('pages/about-us') }}">About Us</a></li>
+						<li><a href="{{ url('pages/services') }}">Services</a></li>
+						<li><a href="{{ url('contact') }}">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 
-        $('.search-button').on('click', function() {
-            $('.search-box').toggleClass('invisible');
-            $('.search-box').toggleClass('visible');
-            $('.search-box').toggleClass('opacity-0', 300);
-            $('.search-box').toggleClass('translate-y-8');
-        });
+	<script src="{{ asset('po-content/frontend/inews/js/jquery.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('po-content/frontend/inews/js/jquery-ui.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('po-content/frontend/inews/js/bootstrap.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('po-content/frontend/inews/bootsnav/js/bootsnav.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('po-content/frontend/inews/js/theia-sticky-sidebar.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('po-content/frontend/inews/js/RYPP.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('po-content/frontend/inews/owl-carousel/owl.carousel.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('po-content/frontend/inews/js/custom.js') }}" type="text/javascript"></script>
 
-        $(document).ready(function() {
-            // Scrolltop button event
-            $('.scrollTop').on('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            })
-        });
-    </script>
-
-    @stack('scripts')
+	@stack('scripts')
 </body>
-
 </html>

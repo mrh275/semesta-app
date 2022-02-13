@@ -1,44 +1,27 @@
-@extends(getTheme('layouts.page'))
+@extends(getTheme('layouts.app'))
 
 @section('content')
-    <div class="big-hero page-hero-section">
-        <img src="{{ asset('po-content/uploads/404.svg') }}" alt="404" class="page-img w-full h-inherit object-center object-cover">
-        <div class="page-hero flex justify-center items-center h-inherit absolute top-0 w-full">
-            <div class="hero-section">
-                <h1 class="page-hero-title">
-                    404
-                </h1>
-            </div>
-        </div>
-    </div>
-
-    <div class="content">
-        <div class="wrapper sejarah">
-            <div class="wrapper-content">
-                <!-- Detail Post Section -->
-                <div class="berita-container">
-                    <div class="berita-terbaru-container">
-                        <div class="berita-terbaru-content">
-                            <div class="berita-wrapper">
-                                <div class="berita-terbaru-1 berita-terbaru">
-                                    <div class="page-card">
-                                        <div class="page-card-title">
-                                            <img src="{{ asset('po-content/uploads/404.svg') }}" alt="404" class="page-img">
-                                        </div>
-                                        <div class="page-card-content">
-                                            <h1 class="page-title" style="text-align: center; color: rgb(0,32,56)">
-                                                Mau cari apa hayoo?
-                                            </h1>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @include(getTheme('partials.sidebar'))
-        </div>
-    </div>
+	<div class="page-title">&nbsp;</div>
+	
+	<div class="container">
+		<div class="row row-m">
+			<div class="col-sm-8 col-p main-content">
+				<div class="theiaStickySidebar">
+					<div class="post-inner">
+						<div class="post-body text-center">
+							<div class="typography-content">
+								<h1>404</h1>
+								<h3>Page Not Found</h3>
+								<p style="margin:30px auto;">Unfortunately the content you’re looking for isn’t here. There may be a misspelling in your web address or you may have clicked a link for content that no longer exists. Perhaps you would be interested in our most recent articles.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-4 col-p rightSidebar">
+				@include(getTheme('partials.sidebar'))
+			</div>
+		</div>
+	</div>
 @endsection

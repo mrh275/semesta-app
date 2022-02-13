@@ -1,176 +1,198 @@
 @extends(getTheme('layouts.app'))
 
 @section('content')
-    <!-- Slider main container -->
-    <div class="swiper big-hero">
-        <!-- Additional required wrapper -->
-        <div class="swiper-wrapper">
-            <!-- Slides -->
-            @foreach (headlinePost(3, 0) as $headlinePost)
-                <div class="swiper-slide">
-                    <img src="{{ getPicture($headlinePost->picture, 'original', $headlinePost->updated_by) }}" alt="Image-1" class="img-hero lg:img-hero-lg">
-                    <div class="hero-bg-section">
-                        <div class="hero-section">
-                            <a href="{{ prettyUrl($headlinePost) }}">
-                                <h1 class="hero-title">
-                                    {{ $headlinePost->title }}
-                                </h1>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-        <!-- If we need pagination -->
-        <div class="swiper-pagination"></div>
-
-        <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev">
-            <i class="bi bi-chevron-left"></i>
-        </div>
-        <div class="swiper-button-next">
-            <i class="bi bi-chevron-right"></i>
-        </div>
-    </div>
-
-    <!-- Sambutan Kepsek Section -->
-    <div class="sambutan">
-        <div class="sambutan-container-left">
-            <img src="{{ asset('po-content/frontend/semesta/img/no-profile.png') }}" alt="Sambutan Kepala Sekolah Image" class="sambutan-img ">
-        </div>
-        <div class="sambutan-container-right">
-            <h2 class="sambutan-title">
-                Sambutan Kepala Sekolah
-            </h2>
-
-            <p class="sambutan-desc">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, iusto! Impedit, inventore. Ducimus et, saepe rerum, neque fugit accusamus quis culpa iusto numquam aspernatur quaerat aliquam autem aperiam, vitae eos.
-            </p>
-        </div>
-    </div>
-
-    <!-- Main -->
-    <div class="wrapper">
-        <div class="wrapper-content">
-            <!-- Berita Terbaru -->
-            <div class="berita-container">
-                <div class="berita-terbaru-container">
-                    <div class="berita-terbaru-header">
-                        <h1 class="berita-terbaru-title">
-                            Berita Terbaru
-                        </h1>
-                    </div>
-
-                    <div class="berita-terbaru-content">
-                        <div class="berita-wrapper">
-                            @foreach (popularPost(2, 0) as $popularPost2)
-                                <a href="{{ prettyUrl($popularPost2) }}" class="berita-terbaru">
-                                    <div class="card">
-                                        <div class="card-title">
-                                            <img src="{{ getPicture($popularPost2->picture, 'medium', $popularPost2->updated_by) }}" alt="Berita Terbaru" class="berita-img">
-                                        </div>
-                                        <div class="card-content">
-                                            <h1 class="berita-title">
-                                                {{ $popularPost2->title }}
-                                            </h1>
-                                            <span class="berita-sub">
-                                                <ion-icon name="person" class="relative author-icon"></ion-icon> <span class="author"> {{ $popularPost2->name }}</span>
-                                                <ion-icon name="calendar" class="relative date-post-icon"></ion-icon> <span class="date-posted">{{ date('d F Y', strtotime($popularPost2->created_at)) }}</span>
-                                            </span>
-                                            <p class="berita-desc">
-                                                {{ \Str::limit(strip_tags($popularPost2->content), 100) }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </a>
-                            @endforeach
-                        </div>
-
-                        <div class="berita-wrapper b-wrap-2">
-                            @foreach (popularPost(2, 2) as $popularPost2)
-                                <a href="{{ prettyUrl($popularPost2) }}" class="berita-terbaru">
-                                    <div class="card">
-                                        <div class="card-title">
-                                            <img src="{{ getPicture($popularPost2->picture, 'medium', $popularPost2->updated_by) }}" alt="Berita Terbaru" class="berita-img">
-                                        </div>
-                                        <div class="card-content">
-                                            <h1 class="berita-title">
-                                                {{ $popularPost2->title }}
-                                            </h1>
-                                            <span class="berita-sub">
-                                                <ion-icon name="person" class="relative author-icon"></ion-icon> <span class="author"> {{ $popularPost2->name }}</span>
-                                                <ion-icon name="calendar" class="relative date-post-icon"></ion-icon> <span class="date-posted">{{ date('d F Y', strtotime($popularPost2->created_at)) }}</span>
-                                            </span>
-                                            <p class="berita-desc">
-                                                {{ \Str::limit(strip_tags($popularPost2->content), 100) }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </a>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Ekskul Post -->
-            <div class="ekskul-container">
-                <div class="post-kategori-container">
-                    <div class="post-kategori-header">
-                        <h1 class="post-kategori-title">Latest Post</h1>
-                    </div>
-
-                    <div class="post-kategori-wrapper">
-                        @foreach (latestPostWithPaging(5) as $latestPost)
-                            <a href="{{ prettyUrl($latestPost) }}" class="berita-terbaru-1">
-                                <div class="card">
-                                    <div class="card-title">
-                                        <img src="{{ getPicture($latestPost->picture, 'medium', $latestPost->updated_by) }}" alt="Latest Post" class="berita-img">
-                                    </div>
-                                    <div class="card-content">
-                                        <h1 class="berita-title">
-                                            {{ $latestPost->title }}
-                                        </h1>
-                                        <span class="berita-sub">
-                                            <ion-icon name="person" class="relative author-icon"></ion-icon> <span class="author">{{ $latestPost->name }}</span>
-                                            <ion-icon name="calendar" class="relative date-post-icon"></ion-icon> <span class="date-posted">{{ date('d F Y', strtotime($latestPost->created_at)) }}</span>
-                                        </span>
-                                        <p class="berita-desc">
-                                            {{ \Str::limit(strip_tags($latestPost->content), 100) }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        @include(getTheme('partials.sidebar'))
-    </div>
-
-
-    <!-- Gallery -->
-    <div class="gallery-wrapper">
-        <div class="gallery-container">
-            <div class="gallery-header">
-                <h2 class="gallery-title">
-                    Galeri
-                </h2>
-            </div>
-
-            <div class="gallery-content">
-                <div class="swiper-wrapper gallery-wrapper-section">
-                    @foreach (latestGallery(8) as $latestGallery)
-                        <div class="swiper-slide gallery-img-wrapper">
-                            <img src="{{ getPicture($latestGallery->picture, 'medium', $latestGallery->updated_by) }}" class="gallery-img" alt="Gallery Images">
-                        </div>
-                    @endforeach
-                </div>
-                <div class="swiper-pagination"></div>
-                <a href="{{ url('album/all') }}" class="nav-link text-xl mt-4 font-bold" style="display: inline-block; text-align: center; color: #0099ff; " onmouseover="this.style.color='#0077ff'" onMouseOut="this.style.color='#0099ff'">Lihat lebih banyak...</a>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<div class="newstricker_inner">
+			<div class="trending"><strong>Trending</strong> Now</div>
+			<div id="NewsTicker" class="owl-carousel owl-theme">
+				@foreach(trendingPost(5) as $trendingPost)
+					<div class="item">
+						<a href="{{ prettyUrl($trendingPost) }}">{{ $trendingPost->title }}</a>
+					</div>
+				@endforeach
+			</div>
+		</div>
+	</div>
+	
+	<section class="slider-inner">
+		<div class="container">
+			<div class="row thm-margin">
+				<div class="col-xs-12 col-sm-8 col-md-8 thm-padding">
+					<div class="slider-wrapper">
+						<div id="owl-slider" class="owl-carousel owl-theme">
+							@foreach(headlinePost(3, 0) as $headlinePost)
+								<div class="item">
+									<div class="slider-post post-height-1">
+										<a href="{{ prettyUrl($headlinePost) }}" class="news-image"><img src="{{ getPicture($headlinePost->picture, 'original', $headlinePost->updated_by) }}" alt="" class="img-responsive"></a>
+										<div class="post-text">
+											<span class="post-category">{{ $headlinePost->ctitle }}</span>
+											<h2><a href="{{ prettyUrl($headlinePost) }}">{{ $headlinePost->title }}</a></h2>
+											<ul class="authar-info">
+												<li class="authar"><a href="{{ prettyUrl($headlinePost) }}">{{ $headlinePost->name }}</a></li>
+												<li class="date">{{ date('d F Y' , strtotime($headlinePost->created_at)) }}</li>
+												<li class="view"><a href="{{ prettyUrl($headlinePost) }}">{{ $headlinePost->hits }} Views</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							@endforeach
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4 thm-padding">
+					<div class="row slider-right-post thm-margin">
+						@foreach(headlinePost(2, 3) as $headlinePost2)
+							<div class="col-xs-6 col-sm-12 col-md-12 thm-padding">
+								<div class="slider-post post-height-2">
+									<a href="{{ prettyUrl($headlinePost2) }}" class="news-image"><img src="{{ getPicture($headlinePost2->picture, 'medium', $headlinePost2->updated_by) }}" alt="" class="img-responsive"></a>
+									<div class="post-text">
+										<span class="post-category">{{ $headlinePost2->ctitle }}</span>
+										<h4><a href="{{ prettyUrl($headlinePost2) }}">{{ $headlinePost2->title }}</a></h4>
+										<ul class="authar-info">
+											<li class="authar hidden-xs hidden-sm"><a href="{{ prettyUrl($headlinePost2) }}">{{ $headlinePost2->name }}</a></li>
+											<li class="hidden-xs">{{ date('d F Y' , strtotime($headlinePost2->created_at)) }}</li>
+											<li class="view hidden-xs hidden-sm"><a href="{{ prettyUrl($headlinePost2) }}">{{ $headlinePost2->hits }} Views</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						@endforeach
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<div class="container">
+		<div class="row row-m">
+			<div class="col-sm-8 col-p main-content">
+				<div class="theiaStickySidebar">
+					<div class="post-inner">
+						<div class="post-head">
+							<h2 class="title"><strong>Popular</strong> Posts</h2>
+						</div>
+						
+						<div class="post-body">
+							<div id="post-slider" class="owl-carousel owl-theme">
+								<div class="item">
+									<div class="row">
+										<div class="col-sm-6 main-post-inner bord-right">
+											@foreach(popularPost(1, 0) as $popularPost)
+												<article>
+													<figure>
+														<a href="{{ prettyUrl($popularPost) }}"><img src="{{ getPicture($popularPost->picture, 'medium', $popularPost->updated_by) }}" height="242" width="345" alt="" class="img-responsive"></a>
+														<span class="post-category">{{ $popularPost->ctitle }}</span>
+													</figure>
+													<div class="post-info">
+														<h3><a href="{{ prettyUrl($popularPost) }}">{{ $popularPost->title }}</a></h3>
+														<ul class="authar-info">
+															<li><i class="ti-timer"></i> {{ date('d F Y' , strtotime($popularPost->created_at)) }}</li>
+															<li class="like"><a href="{{ prettyUrl($popularPost) }}"><i class="ti-eye"></i> {{ $popularPost->hits }} Views</a></li>
+														</ul>
+														<p>{{ \Str::limit(strip_tags($popularPost->content), 250) }}</p>
+													</div>
+												</article>
+											@endforeach
+										</div>
+										
+										<div class="col-sm-6">
+											<div class="news-list">
+												@foreach(popularPost(4, 1) as $popularPost2)
+													<div class="news-list-item">
+														<div class="img-wrapper">
+															<a href="{{ prettyUrl($popularPost2) }}" class="thumb">
+																<img src="{{ getPicture($popularPost2->picture, 'medium', $popularPost2->updated_by) }}" alt="" class="img-responsive">
+																@if($popularPost2->type == 'picture')
+																	<div class="link-icon">
+																		<i class="fa fa-image"></i>
+																	</div>
+																@elseif($popularPost2->type == 'video')
+																	<div class="link-icon">
+																		<i class="fa fa-camera"></i>
+																	</div>
+																@endif
+															</a>
+														</div>
+														<div class="post-info-2">
+															<h5><a href="{{ prettyUrl($popularPost2) }}" class="title">{{ $popularPost2->title }}</a></h5>
+															<ul class="authar-info">
+																<li><i class="ti-timer"></i> {{ date('d F Y' , strtotime($popularPost2->created_at)) }}</li>
+																<li class="like hidden-xs hidden-sm"><a href="{{ prettyUrl($popularPost2) }}"><i class="ti-eye"></i> {{ $popularPost2->hits }} Views</a></li>
+															</ul>
+														</div>
+													</div>
+												@endforeach
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="add-inner">
+						<img src="{{ asset('po-content/frontend/inews/images/add728x90-1.jpg') }}" class="img-responsive" alt="">
+					</div>
+					
+					<div class="post-inner">
+						<div class="post-head">
+							<h2 class="title"><strong>Latest</strong> Posts</h2>
+						</div>
+						
+						<div class="post-body">
+							@foreach(latestPostWithPaging(5) as $latestPost)
+								<div class="news-list-item articles-list">
+									<div class="img-wrapper">
+										<a href="{{ prettyUrl($latestPost) }}" class="thumb"><img src="{{ getPicture($latestPost->picture, 'medium', $latestPost->updated_by) }}" alt="" class="img-responsive"></a>
+									</div>
+									<div class="post-info-2">
+										<h4><a href="{{ prettyUrl($latestPost) }}" class="title">{{ $latestPost->title }}</a></h4>
+										<ul class="authar-info">
+											<li><i class="ti-timer"></i> {{ date('d F Y' , strtotime($latestPost->created_at)) }}</li>
+											<li class="like"><a href="{{ prettyUrl($latestPost) }}"><i class="ti-eye"></i> {{ $latestPost->hits }} Views</a></li>
+										</ul>
+										<p class="hidden-sm">{{ \Str::limit(strip_tags($popularPost->content), 250) }}</p>
+									</div>
+								</div>
+							@endforeach
+						</div>
+						
+						<div class="post-footer"> 
+							<div class="row thm-margin">
+								<div class="col-md-12 thm-padding">
+									{{ latestPostWithPaging(5)->links() }}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-4 col-p rightSidebar">
+				@include(getTheme('partials.sidebar'))
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="featured-inner">
+					<div id="featured-owl" class="owl-carousel">
+						@foreach(latestGallery(8) as $latestGallery)
+							<div class="item">
+								<div class="featured-post">
+									<a href="{{ url('album/'.$latestGallery->aseotitle) }}" class="news-image"><img src="{{ getPicture($latestGallery->picture, 'medium', $latestGallery->updated_by) }}" alt="" class="img-responsive"></a>
+									<div class="post-text">
+										<span class="post-category">{{ $latestGallery->atitle }}</span>
+										<h4>{{ $latestGallery->title }}</h4>
+									</div>
+								</div>
+							</div>
+						@endforeach
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 @endsection
