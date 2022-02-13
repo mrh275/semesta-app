@@ -203,6 +203,13 @@
             uniqueImages: true,
         })
 
+        $('.search-button').on('click', function() {
+            $('.search-box').toggleClass('invisible');
+            $('.search-box').toggleClass('visible');
+            $('.search-box').toggleClass('opacity-0', 300);
+            $('.search-box').toggleClass('translate-y-8');
+        });
+
         // Popular post vertical carousel
         let verticalSlider = new Splide('.splide', {
             direction: 'ttb',
@@ -243,14 +250,6 @@
         });
         verticalSlider.mount();
 
-
-        $('.search-button').on('click', function() {
-            $('.search-box').toggleClass('invisible');
-            $('.search-box').toggleClass('visible');
-            $('.search-box').toggleClass('opacity-0', 300);
-            $('.search-box').toggleClass('translate-y-8');
-        });
-
         $(document).ready(function() {
             // Scrolltop button event
             $('.scrollTop').on('click', function() {
@@ -258,7 +257,8 @@
                     top: 0,
                     behavior: 'smooth'
                 });
-            })
+            });
+
         });
     </script>
 
