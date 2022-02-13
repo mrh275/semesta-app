@@ -1,0 +1,39 @@
+.popular-post-wrapper {
+    height: 534px;
+}
+
+@media(max-width: 1536px) {
+    .popular-post-wrapper {
+        height: 483px;
+    }
+}
+
+@media(max-width: 1366px) {
+    .popular-post-wrapper {
+        height: 445px;
+    }
+}
+
+@media(max-width: 1280px) {
+    .popular-post-wrapper {
+        height: 445px;
+    }
+}
+
+@media(max-width: 1023px) {
+    .popular-post-wrapper {
+        height: 442px;
+    }
+}
+
+@media(max-width: 640px) {
+    .popular-post-wrapper {
+        height: 446px;
+    }
+}
+
+@media(max-width: 434px) {
+    .popular-post-wrapper {
+        height: 426px;
+    }
+}
