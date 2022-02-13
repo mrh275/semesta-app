@@ -33,7 +33,7 @@
                                             <div class="page-desc">
                                                 @if (Session::has('flash_message'))
                                                     <div class="alert alert-success">
-                                                        <span class="block sm:inline">{{ Session::get('flash_message') }}</span>
+                                                        <span class="block sm:inline">{!! Session::get('flash_message') !!}</span>
                                                     </div>
                                                 @endif
 
@@ -51,19 +51,19 @@
                                                     {{ csrf_field() }}
                                                     <div class="contact-input">
                                                         <label for="input-contact-nama" class="contact-label">Nama</label><br>
-                                                        <input type="text" name="nama" id="input-contact-nama" class="input-form-contact" value="{{ old('name') }}">
+                                                        <input type="text" name="name" id="input-contact-nama" class="input-form-contact" value="{{ old('name') }}">
                                                     </div>
                                                     <div class="contact-input">
                                                         <label for="input-contact-email" class="contact-label">Email</label><br>
-                                                        <input type="text" name="email" class="input-form-contact" id="input-contact-email" value="{{ old('email') }}">
+                                                        <input type="email" name="email" class="input-form-contact" id="input-contact-email" value="{{ old('email') }}">
                                                     </div>
                                                     <div class="contact-input">
                                                         <label for="input-contact-email" class="contact-label">Subject</label><br>
-                                                        <input type="text" name="email" class="input-form-contact" id="input-contact-email" value="{{ old('subject') }}">
+                                                        <input type="text" name="subject" class="input-form-contact" id="input-contact-email" value="{{ old('subject') }}">
                                                     </div>
                                                     <div class="contact-input">
                                                         <label for="input-contact-area" class="contact-label">Kritik dan Saran anda</label><br>
-                                                        <textarea name="contact-area" id="input-contact-area" class="contact-area">{{ old('message') }}</textarea>
+                                                        <textarea name="message" id="input-contact-area" class="contact-area">{{ old('message') }}</textarea>
                                                     </div>
                                                     <div class="contact-input">
                                                         {!! NoCaptcha::display() !!}
