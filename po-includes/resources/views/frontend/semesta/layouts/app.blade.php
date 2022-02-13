@@ -200,7 +200,7 @@
     <script src="{{ asset('po-content/frontend/semesta/dist/js/page.js') }}"></script>
     <script>
         let lightbox = new SimpleLightbox(".gallery a", {
-            uniqueImages: false,
+            uniqueImages: true,
         })
 
         // Popular post vertical carousel
