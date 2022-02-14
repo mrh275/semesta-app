@@ -10,7 +10,7 @@
         @endif
 @endif
 @if (count($menu->children) > 0)
-    <ul class="drop-1-lg absolute left-full top-20 invisible collapse">
+    <ul class="drop-1-lg absolute invisible collapse">
         @foreach ($menu->children as $menu)
             @if (count($menu->children) > 0)
                 <li>
