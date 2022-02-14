@@ -26,7 +26,7 @@
                                     {{ \Str::limit(strip_tags($headlinePost->content), 150) }}
                                 </p>
                             </div>
-                            <div>
+                            <div class="flex justify-center lg:justify-start">
                                 <a href="{{ prettyUrl($headlinePost) }}" class="btn btn-primary">Read more...</a>
                             </div>
                         </div>
