@@ -49,7 +49,7 @@
     <!-- Sambutan Kepsek Section -->
     <div class="sambutan">
         <div class="sambutan-container-left">
-            <img src="{{ asset('po-content/frontend/semesta/img/no-profile.png') }}" alt="Sambutan Kepala Sekolah Image" class="sambutan-img ">
+            <img src="{{ asset('po-content/uploads/medium/medium_kepsek.jpg') }}" alt="Sambutan Kepala Sekolah Image" class="sambutan-img ">
         </div>
         <div class="sambutan-container-right">
             <h2 class="sambutan-title">
@@ -57,7 +57,7 @@
             </h2>
 
             <p class="sambutan-desc">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, iusto! Impedit, inventore. Ducimus et, saepe rerum, neque fugit accusamus quis culpa iusto numquam aspernatur quaerat aliquam autem aperiam, vitae eos.
+                <strong>Epul Saepul, S.Pd.I., M.Pd. - </strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, iusto! Impedit, inventore. Ducimus et, saepe rerum, neque fugit accusamus quis culpa iusto numquam aspernatur quaerat aliquam autem aperiam, vitae eos.
             </p>
         </div>
     </div>
