@@ -17,6 +17,7 @@
     {{-- CSS --}}
     <link href="{{ asset('po-content/frontend/semesta/dist/css/main.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('po-content/frontend/semesta/dist/css/page.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('po-content/frontend/semesta/dist/css/post.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('po-content/frontend/semesta/dist/css/vertical-slide.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('po-content/frontend/semesta/dist/css/calendar.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('po-content/frontend/semesta/dist/css/gallery.css') }}" rel="stylesheet" type="text/css" />
