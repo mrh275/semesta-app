@@ -59,17 +59,6 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="tag-wrapper">
-                                                <h3 class="tag-label">
-                                                    Tags :
-                                                </h3>
-                                                <div class="tag-btn-wrapper">
-                                                    <a href="#" class="tag-link">Tag</a>
-                                                    <a href="#" class="tag-link">Tag</a>
-                                                    <a href="#" class="tag-link">Tag</a>
-                                                    <a href="#" class="tag-link">Tag</a>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
 
