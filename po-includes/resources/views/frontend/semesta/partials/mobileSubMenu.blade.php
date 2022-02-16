@@ -1,6 +1,6 @@
 @if (count($menu->children) > 0)
-    <li>
-        <a href="{{ url($menu->url) }}" class="dropdown-link dropdown-1" data-toggle="dropdown">{!! $menu->title !!}</a>
+    <li class="dropdown-1">
+        <a href="{{ url($menu->url) }}" class="dropdown-link" data-toggle="dropdown">{!! $menu->title !!}</a>
     @else
     <li>
         @if ($menu->target == 'none')
