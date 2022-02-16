@@ -7,6 +7,8 @@
 	<meta name="robots" content="index, follow" />
     <meta name="generator" content="{{ config('app.version') }}" />
     <meta name="author" content="{{ getSetting('web_author') }}" />
+	<meta name="description" content="{{ getSetting('web_description') }}">
+	<meta name="keywords" content="{{ getSetting('web_keyword') }}">
 	<meta name="csrf-token" content="{{ csrf_token() }}" />
 
 	{!! SEO::generate() !!}
