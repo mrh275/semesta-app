@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="@yield('title')" />
     <meta name="generator" content="{{ config('app.version') }}" />
-    <meta name="author" content="POPOJI" />
+    <meta name="author" content="SMAN 1 Rawamerta" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title') - {{ config('app.name') }}</title>
