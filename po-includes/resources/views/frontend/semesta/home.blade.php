@@ -57,7 +57,8 @@
             </h2>
 
             <p class="sambutan-desc">
-                <strong>Epul Saepul, S.Pd.I., M.Pd. - </strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, iusto! Impedit, inventore. Ducimus et, saepe rerum, neque fugit accusamus quis culpa iusto numquam aspernatur quaerat aliquam autem aperiam, vitae eos.
+                <strong>Epul Saepul, S.Pd.I., M.Pd. - </strong> Selamat datang di website resmi SMA Negeri 1 Rawamerta. <br>
+                SMA Negeri 1 Rawamerta adalah sekolah yang berada di Kabupaten Karawang. Kami berusaha mencetak generasi yang memiliki kemampuan dalam bidang IPTEK. Salah satunya dengan web sekolah ini, kami harap siswa-siswi dapat mengakses informasi terbaru yang disekolah.
             </p>
         </div>
     </div>
